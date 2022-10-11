@@ -17,6 +17,11 @@ public class Automovel {
     private String cor;
     private String observacoes;
 
+    public Automovel() {
+        this.codigo = 0;
+        this.modelo = "";
+    }
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -127,11 +132,6 @@ public class Automovel {
 
     public String getObservacoes() {
         return observacoes;
-    }
-
-    public Automovel() {
-        this.codigo = 0;
-        this.modelo = "";
     }
 
 }
