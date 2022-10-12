@@ -6,43 +6,60 @@ import static org.junit.jupiter.api.Assertions.*;
 class AutomovelBuilderTest {
 
     @Test
-    void deveRetornarExcecaoParaAlunoSemMatricula() {
+    void deveRetornarExcecaoParaAutomovelSemModelo() {
         try {
-            AutomovelBuilder automovelBuilder = new AutomovelBuilder();
-            Automovel automovel = automovelBuilder
-                    .setModelo("Fiat Uno")
-                    .setMarca("Fiat")
+            AutomovelBuilder automovel = new AutomovelBuilder();
+            automovel.setModelo("")
+                    .setCodigo(221)
+                    .setPlaca("1111EEE")
+                    .setMecanicoResponsavel("Fulano")
                     .build();
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Registro inválido", e.getMessage());
+            assertEquals("Modelo inválido", e.getMessage());
         }
     }
 
     @Test
-    void deveRetornarExcecaoParaAlunoSemNome() {
+    void deveRetornarExcecaoParaAutomovelComCodigoErrado() {
         try {
-            AutomovelBuilder automovelBuilder = new AutomovelBuilder();
-            Automovel automovel = automovelBuilder
-                    .setCodigo(2113)
+            AutomovelBuilder automovel = new AutomovelBuilder();
+            automovel.setCodigo(0)
                     .setModelo("Fiat Strada Endurance")
+                    .setPlaca("1111EEE")
+                    .setMecanicoResponsavel("Fulano")
                     .build();
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Nome inválido", e.getMessage());
+            assertEquals("Código inválido", e.getMessage());
         }
     }
 
     @Test
     void deveRetornarAlunoValido() {
-        AutomovelBuilder automovelBuilder = new AutomovelBuilder();
-        Automovel automovel = automovelBuilder
-                .setCodigo(2113)
+        AutomovelBuilder automovel = new AutomovelBuilder();
+        automovel.setCodigo(2221)
                 .setModelo("Fiat Strada Endurance")
-                .setMarca("Fiat")
+                .setPlaca("1111EEE")
+                .setMecanicoResponsavel("Fulano")
                 .build();
 
         assertNotNull(automovel);
+    }
+
+    @Test
+    void deveRetornarPlacaInvalida() {
+        try {
+            AutomovelBuilder automovel = new AutomovelBuilder();
+            automovel.setCodigo(2221)
+                    .setModelo("Fiat Strada Endurance")
+                    .setPlaca("1111E")
+                    .setMecanicoResponsavel("Fulano")
+                    .build();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Placa inválida", e.getMessage());
+        }
     }
 
 }

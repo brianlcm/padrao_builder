@@ -11,6 +11,12 @@ public class AutomovelBuilder {
         if (automovel.getModelo().equals("")) {
             throw new IllegalArgumentException("Modelo inválido");
         }
+        if (automovel.getPlaca().length() != 7) {
+            throw new IllegalArgumentException("Placa inválida");
+        }
+        if (automovel.getMecanicoResponsavel().equals("")) {
+            throw new IllegalArgumentException("Nome de mecânico inválido");
+        }
         return automovel;
     }
 
